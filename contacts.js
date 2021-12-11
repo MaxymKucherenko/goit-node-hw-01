@@ -21,11 +21,6 @@ async function getContactById(contactId) {
 
 async function removeContact(contactId) {
   const contacts = await listContacts();
-  /*  const idx = contacts.findIndex((item) => item.id === contactId);
-    if (idx === -1) {
-        return null;
-    }
-    const removeContacts = contacts.splice(idx, 1); */
   const newContacts = contacts.filter((contact) => contact.id !== contactId);
   fs.writeFile(contactsPath, JSON.stringify(newContacts));
   return newContacts;
@@ -41,10 +36,11 @@ async function addContact(name, email, phone) {
       phone: phone,
     };
     const newContacts = [...contacts, newContact];
-    console.log(newContacts);
     fs.writeFile(contactsPath, JSON.stringify(newContacts));
     return newContacts;
   }
+  console.log('Required fields are empty!');
+  return;
 }
 
 module.exports = {

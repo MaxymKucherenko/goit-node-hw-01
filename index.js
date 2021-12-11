@@ -20,11 +20,22 @@ const invokeAction = async ({ action, id, name, email, phone }) => {
         email,
         phone
       );
-      console.log(newContact);
+      console.log(
+        'A new contact has been added. New list of contacts:',
+        newContact
+      );
       break;
     case 'remove':
+      const indexId = await contactsOperations.getContactById(id);
+      if (!indexId) {
+        console.log(`Contact with id=${id} is not in the list.`);
+        return
+      }
       const newContacts = await contactsOperations.removeContact(id);
-      console.log(newContacts);
+      console.log(
+        `Contact with id=${id} has been deleted. New list of contacts:`,
+        newContacts
+      );
       break;
     default:
       console.warn('\x1B[31m Unknown action type!');
