@@ -22,7 +22,7 @@ async function getContactById(contactId) {
 async function removeContact(contactId) {
   const contacts = await listContacts();
   const newContacts = contacts.filter((contact) => contact.id !== contactId);
-  fs.writeFile(contactsPath, JSON.stringify(newContacts));
+  await fs.writeFile(contactsPath, JSON.stringify(newContacts));
   return newContacts;
 }
 
