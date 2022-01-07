@@ -36,7 +36,7 @@ async function addContact(name, email, phone) {
       phone: phone,
     };
     const newContacts = [...contacts, newContact];
-    fs.writeFile(contactsPath, JSON.stringify(newContacts));
+    await fs.writeFile(contactsPath, JSON.stringify(newContacts));
     return newContacts;
   }
   console.log('Required fields are empty!');
